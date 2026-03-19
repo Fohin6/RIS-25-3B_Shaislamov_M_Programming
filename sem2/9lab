@@ -1,0 +1,62 @@
+#include <iostream>
+#include <clocale>
+#include <fstream>
+#include <string>
+using namespace std;
+
+
+int main()
+{
+    setlocale(LC_ALL, "Ru");
+    string pathf1 = "C:\\vsproj\\Test\\F1.txt";
+    string pathf2 = "C:\\vsproj\\Test\\F2.txt";
+    ifstream read;
+    ofstream write;
+    write.open(pathf2);
+    read.open(pathf1);
+    int N1, N2;
+    string line;
+    cout << "Введите N1 и N2: ";
+    cin >> N1 >> N2;
+    int currentLine = 1;
+    while (!read.eof()) {
+        getline(read, line);
+        if (currentLine >= N1 && currentLine <= N2) {
+            if (line[0] == 'A') {
+                write << line << endl;
+                cout << line << endl;
+            }
+        }
+        if (currentLine >= N2 + 3) {
+            cout << "Строка " << currentLine << " (после N2+3): " << line << endl;
+        }
+        currentLine++;
+    }
+    read.close();
+    write.close();
+    //-----------------------------------â„–2
+    ifstream readf2;
+    readf2.open(pathf2);
+    string lastLine, temp;
+    while (getline(readf2, temp)) {
+        if (!temp.empty()) {
+            lastLine = temp;
+        }
+    }
+    int wordCount = 0;
+    bool inWord = false;
+    for (char c : lastLine) {
+        if (c != ' ' && c != '\t') {
+            if (!inWord) {
+                wordCount++;
+                inWord = true;
+            }
+        }
+        else {
+            inWord = false;
+        }
+    }
+     cout << "Последняя строка: " << lastLine << endl;
+    cout << "Кол-во слов в последней строке: " << wordCount << endl;    readf2.close();
+    return 0;
+}
