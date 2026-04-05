@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+class Zarplata {
+	string fio;
+	double oklad = 0;
+	int premia = 0;
+public:
+	Zarplata() {
+		fio = "Anton";
+		oklad = 50000;
+		premia = oklad/0.9;
+	}
+	Zarplata(string fio, double oklad, int premia) {
+		this->fio = fio;
+		this->oklad = oklad;
+		this->premia = premia;
+	}
+	Zarplata(Zarplata& z) {
+		fio = z.fio;
+		premia = z.premia;
+		oklad = z.oklad;
+	}
+	~Zarplata() {
+
+	}
+	string setFio(string fio) {
+		this->fio = fio;
+		return fio;
+	}
+	double setOklad(double oklad) {
+		this->oklad = oklad;
+		return oklad;
+	}
+	int setPremia(int premia) {
+		this->premia = premia;
+		return premia;
+	}
+
+	void Print() {
+		cout << "--------------------\n";
+		cout << "Фио: " << fio << endl;
+		cout << "Оклад: " << oklad << endl;
+		cout << "Премия: " << premia << endl;
+	}
+};
+
+
+
+int main()
+{
+	setlocale(LC_ALL, "ru");
+	Zarplata ft;
+	Zarplata sd("Vlad", 70000, 5000);
+	Zarplata td(sd);
+	cout << "Вывод всех способов\n";
+	ft.Print();
+	sd.Print();
+	td.Print();
+	cout << "\n\nВывод через сетереры\n";
+	ft.setFio("Misha");
+	ft.setOklad(999999);
+	ft.setPremia(150000);
+	ft.Print();
+}
