@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+class Element {
+    double first = 0; 
+    unsigned int second = 0;
+public:
+    Element(double first, int second) {
+        this->first = first;
+        this->second = second;
+    }
+    long double power(double first, int second) {
+        long long result = 1;
+        while (second > 0) {
+            if (second & 1) result *= first;
+            first *= second;
+            second >>= 1;
+        }
+        return result;
+    }
+    double element(int j) {
+        return first * power(second, j);
+    }
+    ~Element() {
+
+    }
+};
+int main()
+{
+    setlocale(LC_ALL, "Ru");
+    cout << "Введите значения первого и второго элемента\n";
+    double a;
+    unsigned int b;
+    cin >> a >> b;
+    Element el(a,b);
+    cout << "От " << a << " до " << b << endl;
+    cout << "J от 1: " << el.element(1) << endl;
+    cout << "J от 2: " << el.element(2) << endl;
+    cout << "J от 3: " << el.element(3) << endl;
+    return 0;
+}
